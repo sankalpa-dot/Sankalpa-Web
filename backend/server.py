@@ -39,10 +39,10 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# Add your routes to the router instead of directly to app
+# Legacy routes (keeping for backward compatibility)
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Portfolio API - Backend is running!"}
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
