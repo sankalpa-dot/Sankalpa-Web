@@ -1,9 +1,10 @@
 import React from 'react';
 import { Calendar, Briefcase } from 'lucide-react';
-import { experience, achievements } from '../mock';
 import { Card, CardContent } from './ui/card';
 
-const Experience = () => {
+const Experience = ({ experience, achievements }) => {
+  if (!experience || !achievements) return null;
+
   return (
     <section id="experience" className="py-24 px-6 bg-[#111111]">
       <div className="max-w-6xl mx-auto">

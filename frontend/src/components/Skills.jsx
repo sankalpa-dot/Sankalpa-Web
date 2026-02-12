@@ -1,12 +1,20 @@
 import React from 'react';
-import { skills } from '../mock';
 import { Badge } from './ui/badge';
 
-const Skills = () => {
+const Skills = ({ skills }) => {
+  if (!skills) return null;
+
   const categories = [
     { title: 'Frontend', data: skills.frontend, color: 'blue' },
     { title: 'Backend', data: skills.backend, color: 'purple' },
     { title: 'Tools & Other', data: skills.tools, color: 'green' }
+  ];
+
+  // Get all unique tech names for badges
+  const allTechs = [
+    ...skills.frontend.map(s => s.name),
+    ...skills.backend.map(s => s.name),
+    ...skills.tools.map(s => s.name)
   ];
 
   return (
@@ -72,17 +80,15 @@ const Skills = () => {
         <div className="mt-12 text-center">
           <h3 className="text-lg font-semibold text-gray-300 mb-4">Technologies I Work With</h3>
           <div className="flex flex-wrap justify-center gap-2">
-            {['React', 'Tailwind CSS', 'JavaScript', 'PHP', 'MySQL', 'Firebase', 'Node.js', 'Git', 'Gemini API', 'HTML5', 'CSS3', 'Figma'].map(
-              (tech, index) => (
-                <Badge
-                  key={index}
-                  variant="outline"
-                  className="px-4 py-2 text-sm border-white/20 hover:border-blue-500 hover:text-blue-400 transition-all cursor-default"
-                >
-                  {tech}
-                </Badge>
-              )
-            )}
+            {allTechs.map((tech, index) => (
+              <Badge
+                key={index}
+                variant="outline"
+                className="px-4 py-2 text-sm border-white/20 hover:border-blue-500 hover:text-blue-400 transition-all cursor-default"
+              >
+                {tech}
+              </Badge>
+            ))}
           </div>
         </div>
       </div>

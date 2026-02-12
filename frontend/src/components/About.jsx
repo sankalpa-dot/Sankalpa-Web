@@ -1,8 +1,9 @@
 import React from 'react';
 import { Code2, Zap, Target } from 'lucide-react';
-import { personalInfo } from '../mock';
 
-const About = () => {
+const About = ({ personalInfo }) => {
+  if (!personalInfo) return null;
+
   const highlights = [
     {
       icon: <Code2 size={24} />,

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Github, ExternalLink, Folder } from 'lucide-react';
-import { projects } from '../mock';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';
 
-const Projects = () => {
+const Projects = ({ projects }) => {
+  if (!projects || projects.length === 0) return null;
+
   return (
     <section id="projects" className="py-24 px-6 bg-[#0a0a0a]">
       <div className="max-w-6xl mx-auto">
