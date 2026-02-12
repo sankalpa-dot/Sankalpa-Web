@@ -1,9 +1,10 @@
 import React from 'react';
 import { Github, Linkedin, Mail, Download, ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
-import { personalInfo } from '../mock';
 
-const Hero = () => {
+const Hero = ({ personalInfo }) => {
+  if (!personalInfo) return null;
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
