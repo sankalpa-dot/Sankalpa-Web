@@ -4,9 +4,9 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { useToast } from '../hooks/use-toast';
-import { personalInfo } from '../mock';
+import { submitContactForm } from '../services/api';
 
-const Contact = () => {
+const Contact = ({ personalInfo }) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +15,8 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  if (!personalInfo) return null;
 
   const handleChange = (e) => {
     setFormData({
@@ -27,15 +29,26 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission (will be replaced with backend API)
-    setTimeout(() => {
+    try {
+      const response = await submitContactForm(formData);
+      
+      if (response.success) {
+        toast({
+          title: "Message Sent!",
+          description: response.message || "Thank you for reaching out. I'll get back to you soon!",
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      }
+    } catch (error) {
       toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon!",
+        title: "Error",
+        description: "Failed to send message. Please try again or email me directly.",
+        variant: "destructive"
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      console.error('Error submitting contact form:', error);
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (

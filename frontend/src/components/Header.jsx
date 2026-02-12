@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 
-const Header = ({ scrolled }) => {
+const Header = ({ scrolled, personalInfo }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId) => {
@@ -21,6 +21,8 @@ const Header = ({ scrolled }) => {
     { label: 'Contact', id: 'contact' }
   ];
 
+  const firstName = personalInfo?.name?.split(' ')[0] || 'Portfolio';
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -33,7 +35,7 @@ const Header = ({ scrolled }) => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="text-xl font-bold tracking-tight hover:text-blue-400 transition-colors"
         >
-          <span className="text-white">Sankalpa</span>
+          <span className="text-white">{firstName}</span>
           <span className="text-blue-500">.</span>
         </button>
 

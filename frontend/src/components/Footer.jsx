@@ -1,9 +1,10 @@
 import React from 'react';
 import { Github, Linkedin, Mail, Heart } from 'lucide-react';
-import { personalInfo } from '../mock';
 
-const Footer = () => {
+const Footer = ({ personalInfo }) => {
   const currentYear = new Date().getFullYear();
+
+  if (!personalInfo) return null;
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -27,7 +28,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <h3 className="text-xl font-bold mb-4">
-              <span className="text-white">Sankalpa</span>
+              <span className="text-white">{personalInfo.name.split(' ')[0]}</span>
               <span className="text-blue-500">.</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
@@ -94,7 +95,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-400 text-sm">
-            © {currentYear} Sankalpa Sovan Samal. All rights reserved.
+            © {currentYear} {personalInfo.name}. All rights reserved.
           </p>
           <p className="text-gray-400 text-sm flex items-center gap-2">
             Built with <Heart size={16} className="text-red-500" /> using React & Tailwind CSS
