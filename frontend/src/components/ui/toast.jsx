@@ -3,7 +3,9 @@ import * as ToastPrimitives from "@radix-ui/react-toast"
 import { cva } from "class-variance-authority";
 import { X } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+function cn(...inputs) {
+  return inputs.filter(Boolean).join(' ')
+}
 
 const ToastProvider = ToastPrimitives.Provider
 
